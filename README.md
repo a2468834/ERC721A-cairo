@@ -12,7 +12,7 @@ A implementation of Chiru Labs' ERC721A written in Cairo for [StarkNet](https://
 
 
 ### First time?
-The following steps are tested by me in both Windows (Intel x64 CPU) and Linux (ARMv8 CPU) environments.
+The following steps are tested by me in both Windows/WSL (Intel x64 CPU) and Ubuntu (ARMv8 CPU) environments.
 
 > I am not sure these steps should work in the Apple M1 computer. 
 
