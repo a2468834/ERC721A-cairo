@@ -18,29 +18,30 @@ The following steps are tested by me in both Windows (Intel x64 CPU) and Linux (
 
 1. Clone the repo and enter the directory.
 2. Create a python virtual environment
-
 ```bash
-python3 -m venv ~/env
+python3 -m venv env
 source env/bin/activate 
 ```
 
-3. Follow the instructions at StarkNet website. ([Setting up the environment](https://www.cairo-lang.org/docs/quickstart.html#setting-up-the-environment))
-4. Install OpenZeppelin Nile
-
+3. Install `libgmp3-dev` or follow the instructions at StarkNet webpage ([Setting up the environment](https://www.cairo-lang.org/docs/quickstart.html#setting-up-the-environment)).
 ```bash
-pip3 install cairo-nile
+sudo apt install -y libgmp3-dev
 ```
 
-5. Install OpenZeppelin Cairo contract library
-
+4. Install Cairo language SDK or
 ```bash
+pip3 install cairo-lang
+```
+
+5. Install OpenZeppelin Nile and Cairo library
+```bash
+pip3 install cairo-nile
 pip3 install openzeppelin-cairo-contracts
 ```
 
-6. After all the steps above, you will at least have successfully installed 3 packages.
-
+6. At this time, you will at least have successfully installed 3 packages.
 ```bash
-(env) ~/ERC721A-cairo$ pip3 list
+(env) ERC721A-cairo$ pip3 list
 Package                      Version
 ---------------------------- ---------
 cairo-lang                   x.x.x
@@ -60,37 +61,33 @@ openzeppelin-cairo-contracts x.x.x
 
 
 ### Setup StarkNet Account
-1. Create a `.env` file with the following content under the root directory `~/`.
-
+1. Create a `.env` file with the following content under the root directory `./`.
 ```
 PriKey=<random_number>
 ```
 
-2. Execute the following command
-
+2. Deploy an StarkNet account contract associated with a given private key.
 ```bash
-nile setup <private_key_alias>
+nile setup --network <network_name> <private_key_alias>
 ```
 
-- Nile will look for an environment variable with the name of <private_key_alias> in the file `.env`.
-- Therefore, it would be something like `nile setup PriKey`.
+- Nile will look for an environment variable with the name of <private_key_alias> in the file `.env`. Therefore, it would be something like `nile setup PriKey`.
+- `<network_name>` could be `goerli` or `mainnet`.
 
 
 ### Compile Cairo contract
 ```bash
 nile compile <path_to_contract>
 ```
-- If the `<path_to_contract>` is an empty string, Nile will automatically compile all contracts under the directory `~/contracts`.
+- If the `<path_to_contract>` is an empty string, Nile will automatically compile all contracts under the directory `./contracts`.
 
 
 ### Deploy Cairo contract
 ```bash
-nile deploy \
---network <network_name> \
-<cairo_file_name>
+nile deploy --network <network_name> <cairo_file_name>
 ```
 - `<network_name>` could be `goerli` or `mainnet`
-- `<cairo_file_name>` should be the name of `*.cairo` contract file which is placed under the directory `~/contracts`.
+- `<cairo_file_name>` should be the name of `*.cairo` contract file which is placed under the directory `./contracts`.
 
 
 ### Interact with Cairo contracts at the StarkNet
