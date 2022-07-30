@@ -211,10 +211,11 @@ func tokenURI{
         syscall_ptr: felt*,
         pedersen_ptr: HashBuiltin*,
         range_check_ptr
-    }(tokenId: Uint256) -> (resultURI: TokenURIBundle):
+    }(tokenId: Uint256) -> (tokenURI_: TokenURIBundle):
     
     let (baseURI: BaseURIBundle) = _baseURI.read()
     
+    # tokenURI_ := string.concat(baseURI, tokenId)
     if (baseURI.low + baseURI.high) != 0:
         return (TokenURIBundle(baseURI, tokenId))
     else:
